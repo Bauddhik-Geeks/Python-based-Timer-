@@ -1,13 +1,30 @@
-from tkinter import Label, Tk 
+from random import randrange
+from tkinter import Label, Tk
 import time
+
 app_window = Tk() 
 app_window.title("Digital Clock in Python") 
-app_window.geometry("420x150") 
 app_window.resizable(1,1)
 
+colors = [
+    ("black", "red"),
+    ("red", "black"),
+    ("white", "black"),
+    ("black", "white"),
+    ("blue", "white"),
+    ("white", "blue"),
+    ("blue", "yellow"),
+    ("yellow", "blue"),
+    ("green", "pink"),
+    ("pink", "green"),
+    ("green", "yellow"),
+    ("yellow", "green"),
+    ("blue", "red"),
+    ("red", "blue"),
+]
+
+background, foreground = colors[randrange(len(colors))]
 text_font= ("Boulder", 68, 'bold')
-background = "black"
-foreground= "red"
 border_width = 25
 
 label = Label(app_window, font=text_font, bg=background, fg=foreground, bd=border_width) 
