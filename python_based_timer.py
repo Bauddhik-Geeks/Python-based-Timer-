@@ -1,10 +1,14 @@
-from random import randrange
-from tkinter import Label, Tk, StringVar, OptionMenu
 import time
+from random import randrange
+from tkinter import Label, OptionMenu, PhotoImage, StringVar, Tk
 
-app_window = Tk() 
-app_window.title("Digital Clock in Python") 
-app_window.resizable(1,1)
+app_window = Tk()
+app_window.title("Digital Clock in Python")
+app_window.resizable(1, 1)
+
+background_image = PhotoImage(file="img.png")
+bg_label = Label(app_window, image=background_image)
+bg_label.place(x=0, y=0)
 
 colors = [
     ("black", "red"),
@@ -23,7 +27,8 @@ colors = [
     ("red", "blue"),
 ]
 
-options_list = ["Dark", "Dark Inverse", "B&W", "B&W Inverse", "Blue", "Blue Inverse", "Apocalypse", "Apocalypse Inverse", "Struggle", "Struggle Inverse", "Juggler", "Juggler Inverse", "Pluto", "Pluto Inverse"]
+options_list = ["Dark", "Dark Inverse", "B&W", "B&W Inverse", "Blue", "Blue Inverse", "Apocalypse",
+                "Apocalypse Inverse", "Struggle", "Struggle Inverse", "Juggler", "Juggler Inverse", "Pluto", "Pluto Inverse"]
 
 selection = StringVar(app_window)
 selection.set("Dark")
@@ -31,17 +36,20 @@ question_menu = OptionMenu(app_window, selection, *options_list)
 question_menu.grid(row=0, column=1)
 
 background, foreground = colors[0]
-text_font= ("Boulder", 68, 'bold')
+text_font = ("Boulder", 68, 'bold')
 border_width = 25
 
-label = Label(app_window, font=text_font, bg=background, fg=foreground, bd=border_width)
+label = Label(app_window, font=text_font, bg=background,
+              fg=foreground, bd=border_width)
 label.grid(row=1, column=1)
 
-def digital_clock(): 
-   time_live = time.strftime("%H:%M:%S")
-   background, foreground = colors[options_list.index(selection.get())]
-   label.config(text=time_live, bg=background, fg=foreground)
-   label.after(200, digital_clock)
+
+def digital_clock():
+    time_live = time.strftime("%H:%M:%S")
+    background, foreground = colors[options_list.index(selection.get())]
+    label.config(text=time_live, bg=background, fg=foreground)
+    label.after(200, digital_clock)
+
 
 digital_clock()
 app_window.mainloop()
